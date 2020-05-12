@@ -16,7 +16,7 @@
            <div class="text-center"><img width="200px" height="270px" src="/storage/{{$bok->cover_image}}" alt="ok" ></div>
             <hr>
 
-            <a target="_blank" href="{!!$bok->url!!}" class="btn btn-primary ">Download</a>
+            <a target="_blank" href="{!!"https//:$bok->url!!"}" class="btn btn-primary ">Download</a>
             <a href="book/{{$bok->id}}" class="btn btn-success float-right">See More</a>
           </div>
         </div>

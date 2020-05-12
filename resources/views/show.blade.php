@@ -19,7 +19,7 @@
 
     <hr>
 	<div class="text-center ">
-            <a target="_blank" href={{"$book->url"}} class="btn btn-primary btn-lg">Download</a>
+            <a target="_blank" href={{"https//:$book->url"}} class="btn btn-primary btn-lg">Download</a>
         </div>
 <hr>
             @if(!Auth::guest())

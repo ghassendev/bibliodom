@@ -25,7 +25,7 @@ class AddImgToBook extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('Books', function (Blueprint $table) {
             $table->dropColumn('cover_image');
         });
     }

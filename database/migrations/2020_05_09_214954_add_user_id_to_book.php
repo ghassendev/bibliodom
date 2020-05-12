@@ -13,7 +13,7 @@ class AddUserIdToBook extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('Books', function (Blueprint $table) {
             $table->integer('user_id');
         });
     }
@@ -25,7 +25,7 @@ class AddUserIdToBook extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('Books', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
     }

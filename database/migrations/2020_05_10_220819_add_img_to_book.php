@@ -13,7 +13,7 @@ class AddImgToBook extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('Books', function (Blueprint $table) {
             $table->string('cover_image');
         });
     }

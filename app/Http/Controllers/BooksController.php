@@ -80,11 +80,7 @@ class BooksController extends Controller
      
             $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
      
-            //save to uploads directory
-            $image->move(public_path("uploads"), $name);
-     
-            //Save images
-            $this->saveImages($request, $image_url);
+           
      
 
 /*
@@ -188,12 +184,7 @@ class BooksController extends Controller
  
         $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
  
-        //save to uploads directory
-        $image->move(public_path("uploads"), $name);
- 
-        //Save images
-        $this->saveImages($request, $image_url);
- 
+       
 
     }
 
@@ -222,8 +213,9 @@ class BooksController extends Controller
         $book->url = $request->input('url');
         if($request->hasFile('cover_image')){
             $book->cover_image = $name;
+            $book->img_url=$image_url;
         }
-        $book->img_url=$image_url;
+        
 
         $book->save();
 

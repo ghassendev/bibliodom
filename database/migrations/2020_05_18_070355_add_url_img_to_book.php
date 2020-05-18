@@ -14,7 +14,7 @@ class AddUrlImgToBook extends Migration
     public function up()
     {
         Schema::table('Books', function (Blueprint $table) {
-            $table->string('img_url');
+            $table->mediumText('img_url');
         });
     }
 

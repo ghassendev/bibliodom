@@ -72,7 +72,7 @@ class BooksController extends Controller
      
             $name = $request->file('cover_image')->getClientOriginalName();
      
-            $image_name = $request->file('image_name')->getRealPath();;
+            $image_name = $request->file('cover_image')->getRealPath();;
      
             Cloudder::upload($image_name, null);
      
@@ -178,7 +178,7 @@ class BooksController extends Controller
      
         $name = $request->file('cover_image')->getClientOriginalName();
  
-        $image_name = $request->file('image_name')->getRealPath();;
+        $image_name = $request->file('cover_image')->getRealPath();;
  
         Cloudder::upload($image_name, null);
  

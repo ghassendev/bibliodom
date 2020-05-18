@@ -13,7 +13,7 @@
             <div class="card-header bg-dark text-light text-center" style="height: 70px"><h4>{{$bok->title}}</h4></div>
            <div class="card-body">
 		   
-           <div class="text-center"><img width="200px" height="270px" src="/storage/{{$bok->cover_image}}" alt="ok" ></div>
+           <div class="text-center"><img width="200px" height="270px" src="{{$bok->img_url}}" alt="ok" ></div>
             <hr>
 
             <a target="_blank" href="{!!$bok->url!!}" class="btn btn-primary ">Download</a>

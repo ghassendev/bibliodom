@@ -11,7 +11,7 @@
   
  <hr>
   
-  <div class="text-center"><img width="450px" height="600px" src="/storage/{{$book->cover_image}}" alt="ok" ></div>
+  <div class="text-center"><img width="450px" height="600px" src="{{$bok->img_url}}" alt="ok" ></div>
   <hr class="my-4">
   
 <p class="lead text-right">{{$book->contenu}}</p>

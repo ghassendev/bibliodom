@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
@@ -61,6 +62,34 @@ class BooksController extends Controller
             'url' => 'required',
             'cover_image' => 'image|nullable|max:1999']);
 
+
+
+
+            // Handle File Upload
+        if($request->hasFile('cover_image')){ 
+     
+           
+     
+            $name = $request->file('cover_image')->getClientOriginalName();
+     
+            $image_name = $request->file('image_name')->getRealPath();;
+     
+            Cloudder::upload($image_name, null);
+     
+            list($width, $height) = getimagesize($image_name);
+     
+            $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+     
+            //save to uploads directory
+            $image->move(public_path("uploads"), $name);
+     
+            //Save images
+            $this->saveImages($request, $image_url);
+     
+
+/*
+
+
         // Handle File Upload
         if($request->hasFile('cover_image')){
             // Get filename with the extension
@@ -72,7 +101,7 @@ class BooksController extends Controller
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('cover_image')->storeAs('public', $fileNameToStore);
+            $path = $request->file('cover_image')->storeAs('public', $fileNameToStore);*/
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -84,7 +113,9 @@ class BooksController extends Controller
         $book->contenu = $request->input('contenu');
         $book->url = $request->input('url');
         $book->user_id=auth()->user()->id;
-        $book->cover_image = $fileNameToStore;
+        $book->cover_image = $name;
+        
+        $book->img_url=$image_url;
         $book->save();
 
         return redirect('book')->with('success', 'Book created');
@@ -140,7 +171,32 @@ class BooksController extends Controller
             ]);
             
 
+    // Handle File Upload
+    if($request->hasFile('cover_image')){ 
+     
+           
+     
+        $name = $request->file('cover_image')->getClientOriginalName();
+ 
+        $image_name = $request->file('image_name')->getRealPath();;
+ 
+        Cloudder::upload($image_name, null);
+ 
+        list($width, $height) = getimagesize($image_name);
+ 
+        $image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+ 
+        //save to uploads directory
+        $image->move(public_path("uploads"), $name);
+ 
+        //Save images
+        $this->saveImages($request, $image_url);
+ 
 
+    }
+
+
+            /*
              // Handle File Upload
         if($request->hasFile('cover_image')){
             // Get filename with the extension
@@ -154,7 +210,7 @@ class BooksController extends Controller
             // Upload Image
             $path = $request->file('cover_image')->storeAs('public', $fileNameToStore);
         } 
-
+*/
 
 
                // Update Book
@@ -163,8 +219,10 @@ class BooksController extends Controller
         $book->contenu = $request->input('contenu');
         $book->url = $request->input('url');
         if($request->hasFile('cover_image')){
-            $book->cover_image = $fileNameToStore;
+            $book->cover_image = $name;
         }
+        $book->img_url=$image_url;
+
         $book->save();
 
         return redirect('book')->with('success', 'book edited');

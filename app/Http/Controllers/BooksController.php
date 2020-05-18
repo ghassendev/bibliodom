@@ -104,6 +104,7 @@ class BooksController extends Controller
             $path = $request->file('cover_image')->storeAs('public', $fileNameToStore);*/
         } else {
             $name = 'noimage.jpg';
+            $image_url='https://res.cloudinary.com/dwnnvtnbi/image/upload/v1589788279/noimage.jpg_l6gseu.png';
         }
 
 

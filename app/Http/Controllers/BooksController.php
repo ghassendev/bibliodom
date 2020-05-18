@@ -103,7 +103,7 @@ class BooksController extends Controller
             // Upload Image
             $path = $request->file('cover_image')->storeAs('public', $fileNameToStore);*/
         } else {
-            $fileNameToStore = 'noimage.jpg';
+            $name = 'noimage.jpg';
         }
 
 
@@ -113,6 +113,7 @@ class BooksController extends Controller
         $book->contenu = $request->input('contenu');
         $book->url = $request->input('url');
         $book->user_id=auth()->user()->id;
+        
         $book->cover_image = $name;
         
         $book->img_url=$image_url;
